@@ -23,7 +23,7 @@ double angleError = 0.0;
 double controlSignal = 0.0;
 double previousError = 0.0;
 double integralTerm = 0.0;
-double Kp = 150.0, Ki = 30.0, Kd = 80.0; // 400에 45
+double Kp = 150.0, Ki = 40.0, Kd = 80.0; // 400에 45
 
 // 타이머
 unsigned long lastControlTime = 0;
@@ -74,12 +74,13 @@ void loop() {
     }
   }
 
+  // 여기서 50ms 맞추고 있음
   // 제어 루프 실행
   if (isRunning && millis() - lastControlTime >= controlInterval) {
     lastControlTime += controlInterval;
 
     // 1. ADC → 각도 (0~360) [필터 적용]
-    ADCvalue = readFilteredADC(A0, 10);  // 10회 평균 필터링
+    ADCvalue = readFilteredADC(A0, 100);  // 10회 평균 필터링
     currentAngle = (ADCvalue - ADCmin) * 360.0 / (ADCmax - ADCmin);
     currentAngle = constrain(currentAngle, 0.0, 360.0);
 
@@ -103,7 +104,7 @@ void loop() {
       previousError = 0;
     } else {
       integralTerm += angleError;
-      integralTerm = constrain(integralTerm, -1000, 1000);
+      integralTerm = constrain(integralTerm, -70, 70);
       double derivativeTerm = (angleError - previousError);
       previousError = angleError;
 

@@ -8,8 +8,12 @@ Description
 - 한번씩 통신 오류 발생 (+ 한번씩 50ms 넘는 루프타임)
 - com_utils : 파일 읽고 쓰기 관련 함수
 
-- 아두이노 <<==시리얼통신==>> 라즈베리파이 <==TCP통신==>> 서버pc 환경은 완료
-- 각 위치의 plant_pid.go 와 controller_pid.go 실행으로 확인 (controller 먼저 실행)
+5/22
+- enc_controller_pid.go 파일로 서버 실행
+- enc_plant_pid.go 파일로 클라이언트 실행하여
+시리얼 통신 암호문 전송 후 송신 환경 완료
+
+Offline 폴더로 행렬 초기 값 암호화 데이터
   
 
 Requirment
